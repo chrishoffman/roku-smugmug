@@ -88,8 +88,8 @@ Function CreateSmugMugConnection() As Object
         
         'Oauth
         endpoint: "http://api.smugmug.com/services/api/rest/1.2.2/",
-        api_key: "APIKEY",
-        api_secret: "APISECRET",
+        api_key: getApiKey(),
+        api_secret: getApiSecret(),
         oauth_signature_method: "HMAC-SHA1",
         oauth_token: RegRead("oauth_token", "Authentication"),
         oauth_token_secret: RegRead("oauth_token_secret", "Authentication"),
@@ -108,10 +108,10 @@ Function CreateSmugMugConnection() As Object
         displayRegistrationScreen: displayRegistrationScreen,
         checkRegistrationStatus: checkRegistrationStatus,
         
-        regUrlBase: "LINKING WEBSITE",
+        regUrlBase: getLinkWebsite(),
         regUrlGetRegCode: "/getRegCode",
         regUrlGetRegResult: "/getRegResult",
-        regUrlWebSite: "LINKING WEBSITE",
+        regUrlWebSite: getLinkWebsite(),
     }
     
     rsp=smugmug.ExecServerAPI("smugmug.service.ping")
@@ -567,11 +567,11 @@ Function getAPIImageURL(size="L" As String, ext="jpg" As String) As String
     height=Val(m.Get("Height"))
     
     if size="L" then
-        if width<=600 or height<=450 then
+        if width<=800 or height<=600 then
             size="M"
         end if
     else if size="M" then
-        if width<=400 or height<=300 then
+        if width<=600 or height<=450 then
             size="S"
         end if
     end if
