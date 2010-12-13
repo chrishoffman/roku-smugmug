@@ -102,7 +102,7 @@ End Function
 '** in the next step after we have something onscreen for teh user 
 '********************************************************************
 Function displayRegistrationScreen() As Object
-    regsite   = "go to " + m.regUrlWebsite
+    regsite   = "go to " + m.regUrlWebsite + "/smugmug"
     regscreen = CreateObject("roCodeRegistrationScreen")
     regscreen.SetMessagePort(CreateObject("roMessagePort"))
     

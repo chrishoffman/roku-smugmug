@@ -316,7 +316,7 @@ Sub BrowseMySmugMug()
         end if
     end if
 
-	screen=uitkPreShowPosterMenu("","My SmugMug")
+    screen=uitkPreShowPosterMenu("","My SmugMug")
 
     highlights=m.getRandomRssHighlights("http://www.smugmug.com/hack/feed.mg?Type=nicknameRecentPhotos&Data="+m.nickname+"&format=atom10",4)
     for i=0 to 3
@@ -385,9 +385,9 @@ Sub DisplayAlbum(album As Object)
                  HDPosterUrl:videolist[0].GetURL("S"),
                  SDPosterUrl:videolist[0].GetURL("S")},
             ]
-			onclick=[0, m, ["DisplayImageSet",imagelist,title], ["BrowseVideos",videolist,title]]
+            onclick=[0, m, ["DisplayImageSet",imagelist,title], ["BrowseVideos",videolist,title]]
             
-			uitkDoPosterMenu(albummenudata, screen, onclick)
+            uitkDoPosterMenu(albummenudata, screen, onclick)
         else 'Video only album
             m.BrowseVideos(videolist, title)
         end if
@@ -570,7 +570,9 @@ Function getAPIImageURL(size="L" As String, ext="jpg" As String) As String
         if width<=800 or height<=600 then
             size="M"
         end if
-    else if size="M" then
+    end if
+    
+    if size="M" then
         if width<=600 or height<=450 then
             size="S"
         end if
@@ -579,9 +581,9 @@ Function getAPIImageURL(size="L" As String, ext="jpg" As String) As String
     if size="L" then
         size="LargeURL"
         size2="MediumURL"
-	else if size="M" then
-		size="MediumURL"
-		size2="SmallURL"
+    else if size="M" then
+        size="MediumURL"
+        size2="SmallURL"
     else if size="S" then
         size="SmallURL"
         size2="ThumbURL"
@@ -859,7 +861,7 @@ Sub BrowseSmugmugCategories()
         msg = port.GetMessage()
         if type(msg) = "roPosterScreenEvent" then
             if msg.isListItemSelected() then
-				selected=msg.GetIndex()
+                selected=msg.GetIndex()
                 m.DisplayImageSet(categoryimages[selected],screen.GetContentList()[selected].Lookup("ShortDescriptionLine1"))
             else if msg.isScreenClosed() then
                 return
@@ -879,7 +881,7 @@ Sub BrowseSmugmugCategories()
         msg = wait(0, port)
         if type(msg) = "roPosterScreenEvent" then
             if msg.isListItemSelected() then
-				selected=msg.GetIndex()
+                selected=msg.GetIndex()
                 m.DisplayImageSet(categoryimages[selected],screen.GetContentList()[selected].Lookup("ShortDescriptionLine1"))
             else if msg.isScreenClosed() then
                 return
@@ -1065,12 +1067,12 @@ Sub DisplayFriendsFamily(ff As Object)
          {ShortDescriptionLine1:"Categories", ShortDescriptionLine2:"Browse Albums by Category", HDPosterUrl:highlights[1], SDPosterUrl:highlights[1]},
          {ShortDescriptionLine1:"Random Photos", ShortDescriptionLine2:"Display slideshow of random photos", HDPosterUrl:highlights[2], SDPosterUrl:highlights[2]},
     ]
-	
-	nickname=ff.Lookup("NickName")
-	displayname=ff.Lookup("DisplayName")
-	onclick=[0, m, ["BrowseAlbums",nickname,displayname], ["BrowseCategories",nickname,displayname], ["RandomPhotos",nickname]]
     
-	uitkDoPosterMenu(menudata, screen, onclick)
+    nickname=ff.Lookup("NickName")
+    displayname=ff.Lookup("DisplayName")
+    onclick=[0, m, ["BrowseAlbums",nickname,displayname], ["BrowseCategories",nickname,displayname], ["RandomPhotos",nickname]]
+    
+    uitkDoPosterMenu(menudata, screen, onclick)
 End Sub
 
 Function newFFListFromXML(xmllist As Object)
@@ -1239,10 +1241,10 @@ function ProcessSlideShowEvent(ss, msg, imagelist, onscreenimage=invalid, title=
         else if msg.IsResumed() then
             ss.SetTextOverlayIsVisible(false)
             ss.ClearButtons()
-		else if msg.isButtonPressed() then
-			ss.ClearButtons()
-			ss.SetTextOverlayIsVisible(false)
-			if msg.GetIndex()=0 then 
+        else if msg.isButtonPressed() then
+            ss.ClearButtons()
+            ss.SetTextOverlayIsVisible(false)
+            if msg.GetIndex()=0 then 
                 ss.Close()'Since we are browsing, this slideshow is no longer necessary
                 m.BrowseImages(imagelist, title)
                 return true
