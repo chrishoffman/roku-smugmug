@@ -47,8 +47,7 @@ roku-smugmug:
 	@echo "  >> creating application zip $(ZIPREL)/$(APPNAME).zip"	
 	@if [ -d $(SOURCEREL)/$(APPNAME) ]; \
 	then \
-		(zip -9 -r "$(ZIPREL)/$(APPNAME).zip" .); \
-		(zip -d "$(ZIPREL)/$(APPNAME).zip" Makefile); \
+		(zip -9 -r "$(ZIPREL)/$(APPNAME).zip" . -x .git\* Makefile); \
 	else \
 		echo "Source for $(APPNAME) not found at $(SOURCEREL)/$(APPNAME)"; \
 	fi
