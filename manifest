@@ -6,4 +6,4 @@ mm_icon_focus_sd=pkg:/images/mm_icon_focus_sd.png
 mm_icon_side_sd=pkg:/images/mm_icon_side_sd.png
 major_version=1
 minor_version=0
-build_version=00015
+build_version=00016
