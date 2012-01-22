@@ -619,10 +619,10 @@ End Function
 'Parse id and key from image URL
 Function getImageIdFromURL(url As String, typ As String) As String
     'Getting image string (<id>_<key>)
-    image_str=Right(url, Len(url)-InStr(1, url, "#"))
+    image_str=Right(url, Len(url)-InStr(1, url, "#!i=")-3)
 
     'Get id
-    delim_pos=InStr(1, image_str, "_")
+    delim_pos=InStr(1, image_str, "&k=")+2
     if typ="id" then
         return Left(image_str, delim_pos-1)
     else if typ="key"
